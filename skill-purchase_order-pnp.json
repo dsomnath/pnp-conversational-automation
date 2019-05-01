@@ -1,0 +1,1007 @@
+{
+  "name": "Purchase_Order PnP",
+  "intents": [
+    {
+      "intent": "CheckPO",
+      "examples": [
+        {
+          "text": "Check my PO"
+        },
+        {
+          "text": "I want to see the recent Purchase orders associated to my userid"
+        },
+        {
+          "text": "Display the recent purchase orders"
+        },
+        {
+          "text": "Show my recent POs"
+        }
+      ]
+    },
+    {
+      "intent": "endconversation",
+      "examples": [
+        {
+          "text": "Thanks much"
+        },
+        {
+          "text": "thanks"
+        },
+        {
+          "text": "thank you"
+        },
+        {
+          "text": "ok, Thanks"
+        },
+        {
+          "text": "ok"
+        },
+        {
+          "text": "Sure"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "SystemId",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Maximo",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "3",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "ECC",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "1",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "SRM",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "CancelAction",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "1",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Select Line Item",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Cancel PO document",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "ChangeAction",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Change Line Item",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Change PO Header",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "1",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "ItemProperty",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Quantity",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "4",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Item Number",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Delivery Plant",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "1",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "5",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "3",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Unit of Measurement",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Item Description",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "POAction",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Cancel",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Change",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "1",
+          "synonyms": []
+        }
+      ]
+    }
+  ],
+  "language": "en",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-09-20"
+    },
+    "runtime_version": "2016-09-20"
+  },
+  "description": "All Demo Uses are configured in this",
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "output": {
+        "text": "This option is still not implemented"
+      },
+      "parent": "node_1_1481603176186",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1481603176186"
+      },
+      "conditions": "@ChangeAction:(Change PO Header) || @ChangeAction:1",
+      "dialog_node": "node_3_1481603774731",
+      "previous_sibling": "node_4_1481604001656"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please wait while I fetch the PO Line Items for PO Number : $poNumber"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1481603176186",
+      "context": {
+        "userId": "$userId",
+        "poIndex": "$poIndex",
+        "url_key": "robot8",
+        "duration": "$duration",
+        "poNumber": "$poNumber",
+        "systemId": "$systemId",
+        "nextState": "userWait",
+        "recipient": "this",
+        "ext_action": true,
+        "context_vars": [
+          "poLineItems:rich"
+        ],
+        "poNumberArray": "$poNumberArray"
+      },
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "@ChangeAction:2 || @ChangeAction:(Change Line Item)",
+      "dialog_node": "node_4_1481604001656",
+      "digress_out": "allow_all"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please wait while I check <b>$duration</b> Purchase Order for user: <b>$userId</b>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_6_1481186012883",
+      "context": {
+        "userId": "<?input.text?>",
+        "url_key": "robot7",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userWait",
+        "recipient": "this",
+        "ext_action": true,
+        "context_vars": [
+          "poList:rich"
+        ]
+      },
+      "metadata": {},
+      "conditions": "!input.text.contains(\" \")",
+      "dialog_node": "node_8_1481265997538"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "$errMsg"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_5_1482221983220",
+      "context": {
+        "userId": "$userId"
+      },
+      "metadata": {},
+      "conditions": "!$success",
+      "dialog_node": "node_4_1485342887883",
+      "previous_sibling": "node_6_1482225132699"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "The following line item has been cancelled: <b>$poLineItem</b>. Email has been sent to vendor with new PO details. Here is the vendor contact details: <br>\n<? $vendorData_rich ?>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_5_1482221983220",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poLineItem": "$poLineItem"
+      },
+      "metadata": {},
+      "conditions": "$success",
+      "dialog_node": "node_6_1482225132699"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "I can change the following aspects of the Purchase Oder. Please specify what you would like to change \n\n<ol><li>PO Header</li>\n<li>PO Line Item</li>\n</ol>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_11_1481269837986",
+      "context": {
+        "userid": "$userid",
+        "poIndex": "$poIndex",
+        "changeop": "<?input.text?>",
+        "duration": "$duration",
+        "poNumber": "$poNumber",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "changeopArray": "Change, Cancel",
+        "poNumberArray": "$poNumberArray"
+      },
+      "metadata": {},
+      "conditions": "@POAction:1 || @POAction:Change",
+      "dialog_node": "node_1_1481603176186",
+      "previous_sibling": "node_13_1481613135298"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "I can cancel the following aspects of the Purchase Oder. Please specify what you would like to cancel\n\n<ol>\n  <li>PO Header</li>\n  <li>PO Line Item</li>\n</ol>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_11_1481269837986",
+      "context": {
+        "userid": "$userid",
+        "poIndex": "$poIndex",
+        "changeop": "<?input.text?>",
+        "duration": "$duration",
+        "poNumber": "$poNumber",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "changeopArray": "Change, Cancel",
+        "poNumberArray": "$poNumberArray"
+      },
+      "metadata": {},
+      "conditions": "@POAction:2 || @POAction:Cancel",
+      "dialog_node": "node_13_1481613135298"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please wait while I change the quantity of selected line item"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_9_1481605363162",
+      "context": {
+        "poQty": "<? input.text ?>",
+        "userId": "$userId",
+        "url_key": "robot9",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userWait",
+        "recipient": "this",
+        "ext_action": true,
+        "poLineItem": "<? $poLineItems[$poLineItemIndex -1] ?>",
+        "context_vars": [
+          "vendorData:rich"
+        ],
+        "poLineItemIndex": "$poLineItemIndex"
+      },
+      "metadata": {},
+      "conditions": "input.text",
+      "dialog_node": "node_10_1481605492025"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please select the property to which you want to make changes to: \n\n<ol><li>Quantity</li>\n<li>Item Description</li><li>Item Number</li><li>Unit of Measurement</li><li>Delivery Plant</li>\n</ol>\n.  "
+          ]
+        }
+      },
+      "parent": "node_7_1481605085749",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poLineItemIndex": "<?input.text?>"
+      },
+      "conditions": "input.text",
+      "dialog_node": "node_1_1485775003827"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Hi $userId!, there was an issue fetching the line item. Please try after some time."
+          ]
+        }
+      },
+      "parent": "node_3_1485342812194",
+      "context": {},
+      "conditions": "#endconversation",
+      "dialog_node": "node_5_1485500957544"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Hi $userId! There was an issue changing the quantity of the item. Please retry after some time."
+          ]
+        }
+      },
+      "parent": "node_2_1485342738747",
+      "context": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1487659204226"
+      },
+      "conditions": "#endconversation",
+      "dialog_node": "node_3_1485500772137"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Hi $userId!, there was an issue fetching the POs. Please try after some time."
+          ]
+        }
+      },
+      "parent": "node_6_1482839929814",
+      "context": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1487659204226"
+      },
+      "conditions": "#endconversation",
+      "dialog_node": "node_4_1485500870426"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Thank you $userId. It was a pleasure serving you. Have a nice day."
+          ]
+        }
+      },
+      "parent": "node_6_1482225132699",
+      "context": {},
+      "conditions": "#endconversation",
+      "dialog_node": "node_2_1485499831949"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": "This is not yet implemented"
+      },
+      "parent": "node_13_1481613135298",
+      "conditions": "@CancelAction:1 || @CancelAction:(Cancel PO document)",
+      "dialog_node": "node_1_1482218097390",
+      "previous_sibling": "node_2_1482221206624"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please wait while I fetch the PO Line Items for PO Number: <b>$poNumber</b>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_13_1481613135298",
+      "context": {
+        "userId": "$userId",
+        "poIndex": "$poIndex",
+        "url_key": "robot8",
+        "duration": "$duration",
+        "poNumber": "$poNumber",
+        "systemId": "$systemId",
+        "nextState": "userWait",
+        "recipient": "this",
+        "ext_action": true,
+        "context_vars": [
+          "poLineItems:rich"
+        ],
+        "poNumberArray": "$poNumberArray"
+      },
+      "metadata": {},
+      "conditions": "@CancelAction:2 || @CancelAction:(Select Line Item)",
+      "dialog_node": "node_2_1482221206624"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Thank you $userId. It was a pleasure serving you. Have a nice day."
+          ]
+        }
+      },
+      "parent": "node_11_1481610646744",
+      "context": {},
+      "conditions": "#endconversation",
+      "dialog_node": "node_1_1485499448706"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "What is the time period for which you would like to see your purchase orders? \n\n<ol>\n    <li>Last 1 week</li>\n    <li>Last 1 month</li>\n    <li>Last 6 months</li>\n    <li>Last 1 year</li>\n</ol>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1481184365872",
+      "context": {
+        "systemId": "ECC",
+        "nextState": "userInput",
+        "durationArray": [
+          "Last 1 week",
+          "Last 1 month",
+          "Last 6 months",
+          "Last 1 year"
+        ]
+      },
+      "metadata": {},
+      "conditions": "@SystemId:ECC || @SystemId:3",
+      "dialog_node": "node_5_1481185398798",
+      "previous_sibling": "node_1_1485697501603"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "This system is not yet implemented. Please try again at a later time. Thank you."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1481184365872",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1487659204226"
+      },
+      "conditions": "@SystemId:1 || @SystemId:2 || @SystemId:SRM || @SystemId:Maximo",
+      "dialog_node": "node_1_1485697501603"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "$errMsg"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1481604001656",
+      "context": {
+        "userId": "$userId"
+      },
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_7_1487659204226"
+      },
+      "conditions": "!$success",
+      "dialog_node": "node_1_1485342621471",
+      "previous_sibling": "node_7_1481605085749"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            " Please wait while I fetch the PO Line Items for PO Number:$poNumber"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1481604001656",
+      "context": {
+        "userId": "$userId",
+        "poIndex": "$poIndex",
+        "duration": "$duration",
+        "poNumber": "$poNumber",
+        "systemId": "$systemId",
+        "nextState": "userWait"
+      },
+      "disabled": true,
+      "metadata": {},
+      "dialog_node": "node_1_1482807225384",
+      "previous_sibling": "node_1_1485342621471"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Here is the list of line item details. Please specify which of these you would like to Change.<br>\n\n    <? $poLineItems_rich ?>\n<br>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1481604001656",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poLineItems": "<? $poLineItems.![itemNumber] ?>"
+      },
+      "metadata": {},
+      "conditions": "$success",
+      "dialog_node": "node_7_1481605085749"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "$errMsg"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_10_1481605492025",
+      "context": {
+        "userId": "$userId"
+      },
+      "metadata": {},
+      "conditions": "!$success",
+      "dialog_node": "node_2_1485342738747",
+      "previous_sibling": "node_11_1481610646744"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Change has been made for lineItem : $poLineItem. The quantity has been changed to $poQty. Email has been sent to vendor with new PO details. Here are the vendor contact details :<br>\n<? $vendorData_rich ?>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_10_1481605492025",
+      "context": {
+        "poQty": "$poQty",
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poLineItem": "$poLineItem",
+        "poLineItemIndex": "$poLineItemIndex"
+      },
+      "metadata": {},
+      "conditions": "$success",
+      "dialog_node": "node_11_1481610646744"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please wait while I cancel the selected line item - <b>$poLineItem</b>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1482221552490",
+      "context": {
+        "userId": "$userId",
+        "url_key": "robot9",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userWait",
+        "recipient": "this",
+        "ext_action": true,
+        "poLineItem": "<? $poLineItems[input.text -1] ?>",
+        "context_vars": [
+          "vendorData:rich"
+        ],
+        "poLineItemIndex": "<?input.text?>"
+      },
+      "metadata": {},
+      "conditions": "input.text",
+      "dialog_node": "node_5_1482221983220"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "I can change or cancel Purchase Orders. Please specify  what action you would like to take\n\n<ol>\n  <li>Change</li>\n  <li>Cancel</li>\n</ol>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_9_1481267853625",
+      "context": {
+        "userid": "$userid",
+        "poIndex": "<?input.text?>",
+        "duration": "$duration",
+        "poNumber": "<? $poNumberArray[input.text-1] ?>",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poNumberArray": "$poNumberArray"
+      },
+      "metadata": {},
+      "conditions": "input.text",
+      "dialog_node": "node_11_1481269837986"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Hi $userId!, there was an issue while trying to cancel the line item. Please try after some time."
+          ]
+        }
+      },
+      "parent": "node_4_1485342887883",
+      "context": {},
+      "conditions": "#endconversation",
+      "dialog_node": "node_6_1485517618918"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please enter a new quantity  for the selected line Item "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1485775003827",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "itemProperty": "<?input.text?>",
+        "poLineItemIndex": "$poLineItemIndex"
+      },
+      "metadata": {},
+      "conditions": "@ItemProperty:1 || @ItemProperty:Quantity",
+      "dialog_node": "node_9_1481605363162",
+      "previous_sibling": "node_3_1485849333806"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "This option is not implemented at this point in time. Please choose other option."
+          ]
+        }
+      },
+      "parent": "node_1_1485775003827",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "poLineItemIndex": "<?input.text?>"
+      },
+      "conditions": "@ItemProperty:2 || @ItemProperty:(Item Number) && @ItemProperty:3 || @ItemProperty:(Item Description) || @ItemProperty:4 && @ItemProperty:(Unit of Measurement) || @ItemProperty:5 || @ItemProperty:(Delivery Plant)",
+      "dialog_node": "node_3_1485849333806"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "$errMsg"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1482221206624",
+      "context": {
+        "userId": "$userId",
+        "ext_action": false
+      },
+      "metadata": {},
+      "conditions": "!$success",
+      "dialog_node": "node_3_1485342812194",
+      "previous_sibling": "node_3_1482221552490"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Here is the list of line item details. Please specify which of these you would like to Cancel.<br>\n\n    <? $poLineItems_rich ?>\n<br>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1482221206624",
+      "context": {
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "ext_action": false,
+        "poLineItems": "<? $poLineItems.![itemNumber] ?>"
+      },
+      "metadata": {},
+      "conditions": "$success",
+      "dialog_node": "node_3_1482221552490"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Hi $userId!, There was issue fetching the PO line items. Please try after some time. "
+          ]
+        }
+      },
+      "parent": "node_1_1485342621471",
+      "context": {},
+      "conditions": "#endconversation",
+      "dialog_node": "node_7_1485517885200"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "$errMsg"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1481265997538",
+      "context": {
+        "userId": "$userId",
+        "ext_action": false
+      },
+      "metadata": {},
+      "conditions": "!$success",
+      "dialog_node": "node_6_1482839929814",
+      "previous_sibling": "node_9_1481267853625"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "The list of POs you have access to are : <br>\n\n<? $poList_rich ?>\n<br>\n\nPlease select a PO you want to work on."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1481265997538",
+      "context": {
+        "poList": "$poList",
+        "userId": "$userId",
+        "duration": "$duration",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "ext_action": false,
+        "poNumberArray": "<? $poList.![poNumber] ?>"
+      },
+      "metadata": {},
+      "conditions": "$success",
+      "dialog_node": "node_9_1481267853625"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Please provide the user id to check Purchase Orders for"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_5_1481185398798",
+      "context": {
+        "duration": "<? $durationArray[input.text-1] ?>",
+        "systemId": "$systemId",
+        "nextState": "userInput",
+        "durationArray": "$durationArray"
+      },
+      "metadata": {},
+      "conditions": "input.text",
+      "dialog_node": "node_6_1481186012883"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            " It appears you have access to 3 systems. Please specify the system on which you would like to see your purchase orders?\n\n<ol>\n    <li>SRM</li>\n    <li>Maximo</li>\n    <li>ECC</li>\n</ol>"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "nextState": "userInput"
+      },
+      "metadata": {},
+      "conditions": "#CheckPO",
+      "dialog_node": "node_4_1481184365872",
+      "previous_sibling": "node_7_1487659204226"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "Thank you"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "conditions": "anything_else",
+      "dialog_node": "node_3_1475642110246",
+      "previous_sibling": "node_4_1481184365872"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "I am your Cognitive Assistant. How can I help you today?"
+          ]
+        }
+      },
+      "context": {
+        "nextState": "userInput"
+      },
+      "conditions": "conversation_start",
+      "dialog_node": "node_7_1487659204226"
+    }
+  ],
+  "workspace_id": "09ed0e85-83d7-48c9-a93f-02e4f4d06054",
+  "counterexamples": [],
+  "learning_opt_out": false,
+  "status": "Available"
+}

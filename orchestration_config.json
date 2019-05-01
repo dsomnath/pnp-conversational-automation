@@ -1,0 +1,83 @@
+{
+"external_config":[
+{
+	"project":"10",
+	"topic":"Password_Reset",
+	"url_key":"robot1",
+	"url":"/api/v1/adapter/invoke/9",
+	"method":"POST",
+	"request_schema":"{\"adapter_id\":\"number\", \"CLIENT_REQ_ID\":\"string\", \"OUTPUT_KEYS\":[\"PWD_RESET1\"], \"url_key\":\"string\", \"ticket_details\": {\"userid\":\"string\",  \"appid\": \"string\"} }",
+	"async":true,
+	"adapter_id":9
+},
+{
+	"project":"10",
+	"topic":"Password_Reset",
+	"url_key":"robot2",
+	"url":"/api/v1/adapter/invoke/9",
+	"request_schema":"{\"adapter_id\":\"number\", \"CLIENT_REQ_ID\":\"string\", \"OUTPUT_KEYS\":[\"PWD_RESET1\"], \"url_key\":\"string\", \"ticket_details\": {\"userid\":\"string\",  \"appid\": \"string\"} }",
+	"adapter_id":9,
+	"method":"POST",
+	"async":true
+},
+{
+	"project":"10",
+	"topic":"Password_Reset",
+	"url_key":"robot3",
+	"url":"/api/v1/adapter/invoke/9",
+	"request_schema":"{\"adapter_id\":\"number\", \"CLIENT_REQ_ID\":\"string\", \"OUTPUT_KEYS\":[\"PWD_RESET1\"], \"url_key\":\"string\", \"ticket_details\": {\"userid\":\"string\",  \"appid\": \"string\"} }",
+	"adapter_id":9,
+	"method":"POST",
+	"async":true
+},
+{
+	"project":"10",
+	"topic":"Password_Reset",
+	"url_key":"robot4",
+	"url":"/api/v1/adapter/invoke/9",
+	"request_schema":"{\"adapter_id\":\"number\", \"CLIENT_REQ_ID\":\"string\", \"OUTPUT_KEYS\":[\"PWD_RESET1\"], \"url_key\":\"string\", \"ticket_details\": {\"userid\":\"string\",  \"appid\": \"string\"} }",
+	"method":"POST",
+	"adapter_id":9,
+	"async":true
+},
+{
+	"project":"122",
+	"topic":"Purchase_Order",
+	"url_key":"robot7",
+	"url":"/api/v1/robotservice/robot7",
+	"method":"GET",
+	"query_params":["userId"]
+},
+{
+	"project":"122",
+	"topic":"Purchase_Order",
+	"url_key":"robot8",
+	"url":"/api/v1/robotservice/robot8",
+	"method":"GET"
+},
+{
+	"project":"122",
+	"topic":"Purchase_Order",
+	"url_key":"robot9",
+	"url":"/api/v1/robotservice/robot9",
+	"method":"GET"
+},
+{
+	"project":"10",
+	"topic":"Create_Ticket",
+	"url_key":"SN_CREATE",
+	"async":false,
+	"url":"/api/v1/adapter/create/4",
+	"method":"POST",
+	"request_schema":"{\"short_description\": \"test ticket\",\"description\": \"test ticket\",\"state\": \"string\",\"comments\": \"string\",\"severity\": \"string\",\"assignment_group\": \"string\",\"category\": \"string\",\"u_root_cause\": \"string\",\"u_application\": \"string\"}"
+},
+{
+	"project":"11",
+	"topic":"Create_Ticket",
+	"url_key":"SN_CREATE",
+	"async":false,
+	"url":"/api/v1/adapter/create/4",
+	"method":"POST",
+	"request_schema":"{\"short_description\": \"test ticket\",\"description\": \"test ticket\",\"state\": \"string\",\"comments\": \"string\",\"severity\": \"string\",\"assignment_group\": \"string\",\"category\": \"string\",\"u_root_cause\": \"string\",\"u_application\": \"string\"}"
+}]
+}
